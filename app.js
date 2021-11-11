@@ -1,6 +1,6 @@
 var app = require('http').createServer()
 var io = module.exports.io = require("socket.io")(app, { cors: {
-  origin: "http://localhost:42069",
+  origin: "http://vasilie.net:42069",
   methods: ["GET", "POST"],
   }
 })
