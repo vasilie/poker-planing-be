@@ -6,6 +6,7 @@
   "author": "vasilie <vasilie.91@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "pm2": "^5.1.2",
     "serve": "^13.0.2",
     "socket.io": "^4.3.2"
   },
