@@ -1,0 +1,11 @@
+{
+  "name": "poker-planning-be",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "git@github.com:vasilie/poker-planing-be.git",
+  "author": "vasilie <vasilie.91@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^4.3.2"
+  }
+}
