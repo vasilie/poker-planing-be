@@ -1,4 +1,4 @@
-const { GAME_STATE_CHOOSING_CARDS, GAME_STATE_REVEALING_CARDS, GAME_STATE_ALL_CARDS_CHOOSEN } = require('./constants');
+const { GAME_STATE_CHOOSING_CARDS, GAME_STATE_REVEALING_CARDS, GAME_STATE_ALL_CARDS_CHOOSEN, GAME_STATE_NEW_ROUND, NEW_CARD_VALUE } = require('./constants');
 const io = require('./app.js').io
 
 var usernames = {};
@@ -24,8 +24,8 @@ const clearCardValues = (socket) => {
 const calculateAverage = (socket) => {
   const cardValuesAgreement = {};
   const cardValuesAgreementArray = [];
-  let maxPercentage = 0;
 
+  let maxPercentage = 0;
   let valuesSum = 0;
 
   const roomUsernames = usernames[socket.roomId];
@@ -41,7 +41,6 @@ const calculateAverage = (socket) => {
   })
 
   for (const prop in cardValuesAgreement) {
-   
    let percentage = cardValuesAgreement[prop] / valuesSum * 100;
    if (percentage > maxPercentage){
      maxPercentage = percentage;
@@ -51,12 +50,6 @@ const calculateAverage = (socket) => {
   console.log(cardValuesAgreementArray);
 
   return { average, cardValuesAgreement: cardValuesAgreementArray, maxPercentage };
-}
-
-const calculateSatisfaction = () => {
-  let scores = [1, 2, 5 ,6];
-  score = 4;
-  sum = 15;
 }
 
 const checkIfAllCardsChoosen = (socket) => {
@@ -79,28 +72,28 @@ module.exports = function(socket){
 
     socket.join(socket.roomId);
     updateUsernames(socket);
-    io.in(socket.roomId).emit("GAME_STATE_CHOOSING_CARDS", true);
+    io.in(socket.roomId).emit(GAME_STATE_CHOOSING_CARDS, true);
   });
 
-  socket.on("NEW_CARD_VALUE", function(data){
+  socket.on(NEW_CARD_VALUE, function(data){
     usernames[socket.roomId].find(username => username.username === socket.username).cardValue = data.cardValue;
     if (checkIfAllCardsChoosen(socket)){
-      io.in(socket.roomId).emit("GAME_STATE_ALL_CARDS_CHOOSEN", true);
+      io.in(socket.roomId).emit(GAME_STATE_ALL_CARDS_CHOOSEN, true);
     } else {
-      io.in(socket.roomId).emit("GAME_STATE_CHOOSING_CARDS", true);
+      io.in(socket.roomId).emit(GAME_STATE_CHOOSING_CARDS, true);
     }
     updateUsernames(socket);
   });
 
-  socket.on("GAME_STATE_REVEALING_CARDS", function(){
+  socket.on(GAME_STATE_REVEALING_CARDS, function(){
     const data = calculateAverage(socket);
-    io.in(socket.roomId).emit("GAME_STATE_REVEALING_CARDS", data );
+    io.in(socket.roomId).emit(GAME_STATE_REVEALING_CARDS, data );
   });
 
-  socket.on("GAME_STATE_NEW_ROUND", function(){
+  socket.on(GAME_STATE_NEW_ROUND, function(){
     clearCardValues(socket);
     updateUsernames(socket);
-    io.in(socket.roomId).emit("GAME_STATE_NEW_ROUND", true);
+    io.in(socket.roomId).emit(GAME_STATE_NEW_ROUND, true);
   });
 
   socket.on("disconnect",function(data){
