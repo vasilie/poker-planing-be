@@ -62,12 +62,13 @@ module.exports = function(socket){
     // callback(true);
     socket.username = data.username;
     socket.roomId = data.roomId;
+    socket.cardStyle = data.cardStyle;
     // socket.color = data.color;
     
     if (usernames[data.roomId]){
-      usernames[data.roomId].push({ username: socket.username, cardValue: null });
+      usernames[data.roomId].push({ username: socket.username, cardValue: null, cardStyle: socket.cardStyle });
     } else {
-      usernames[data.roomId] = [{ username: socket.username, cardValue: null }];
+      usernames[data.roomId] = [{ username: socket.username, cardValue: null, cardStyle: socket.cardStyle }];
     }
 
     socket.join(socket.roomId);

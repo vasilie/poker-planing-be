@@ -3,7 +3,7 @@ var io = module.exports.io = require("socket.io")(app, { cors: {
   origin: "http://vasilie.net:42069",
   methods: ["GET", "POST"],
   }
-})
+});
 
 const PORT = process.env.PORT || 3231
 const SocketManager = require('./SocketManager')
