@@ -1,5 +1,5 @@
 const { GAME_STATE_CHOOSING_CARDS, GAME_STATE_REVEALING_CARDS, GAME_STATE_ALL_CARDS_CHOOSEN, GAME_STATE_NEW_ROUND, NEW_CARD_VALUE } = require('./constants');
-const io = require('./app.js').io
+const io = require('./server.js').io
 
 var usernames = {};
 
