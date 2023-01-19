@@ -6,18 +6,27 @@
   "author": "vasilie <vasilie.91@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
     "http": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.2",
+    "nodemon": "^2.0.20",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "pm2": "^5.2.2",
     "serve": "^13.0.2",
+    "session": "^0.1.0",
     "socket.io": "^4.3.2"
   },
   "scripts": {
-    "start": "pm2 start app.js --name poker-planing-be",
-    "stop": "pm2 stop app.js poker-planing-be",
-    "dev": "node app.js"
+    "start": "pm2 start server.js --name poker-planing-be",
+    "stop": "pm2 stop server.js poker-planing-be",
+    "dev": "nodemon server.js"
   }
 }
