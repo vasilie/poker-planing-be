@@ -1,5 +1,4 @@
-console.log(process.env.NODE_ENV);
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === "production") {
   require('dotenv').config();
 } else {
   require("dotenv").config({ path: ".env.development" });
@@ -14,9 +13,6 @@ var io = module.exports.io = require("socket.io")(app, { cors: {
 });
 
 const SocketManager = require('./SocketManager')
-setInterval(function(){
-  console.log(process.env.NODE_ENV);
-}, 1000)
 
 io.on('connection', SocketManager)
 
