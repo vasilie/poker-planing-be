@@ -13,7 +13,6 @@
   },
   "scripts": {
     "start": "pm2 start --name poker-planing-be && pm2 monit",
-    "stop": "pm2 stop app.js poker-planing-be",
     "dev": "set NODE_ENV=development && node app.js"
   }
 }
